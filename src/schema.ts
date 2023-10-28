@@ -1,25 +1,6 @@
 import { Kind, Type, TypeRegistry } from "@sinclair/typebox";
-import addFormats from "ajv-formats";
-import Ajv from "ajv";
 import type { SchemaOptions, Static, TSchema, TUnion } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";
-
-const ajv = addFormats(new Ajv({}), [
-  "date-time",
-  "time",
-  "date",
-  "email",
-  "hostname",
-  "ipv4",
-  "ipv6",
-  "uri",
-  "uri-reference",
-  "uuid",
-  "uri-template",
-  "json-pointer",
-  "relative-json-pointer",
-  "regex",
-]);
 
 TypeRegistry.Set(
   "ExtendedOneOf",

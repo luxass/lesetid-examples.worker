@@ -1,20 +1,13 @@
-import {
-  Octokit,
-} from "@octokit/core";
-import {
-  paginateRest,
-} from "@octokit/plugin-paginate-rest";
 import type { Context } from "hono";
-
-export const $Octokit = Octokit.plugin(paginateRest);
+import type { Example } from "./types";
 
 export function addExampleRedirects<TContext extends Context>(ctx: TContext, url: URL, example: string) {
   if (url.host.startsWith(example) || url.host.startsWith(`${example}-example`)) {
-    if (url.pathname === "/codesandbox" || url.pathname === "/csb") {
+    if (url.pathname === "/codesandbox") {
       return ctx.redirect(`/${example}/codesandbox`);
     }
 
-    if (url.pathname === "/codespaces" || url.pathname === "/codespace") {
+    if (url.pathname === "/codespaces") {
       return ctx.redirect(`/${example}/codespace`);
     }
 
@@ -22,4 +15,4 @@ export function addExampleRedirects<TContext extends Context>(ctx: TContext, url
   }
 }
 
-export const EXAMPLES_MAP = new Map();
+export const EXAMPLES: Example[] = [];
