@@ -1,13 +1,15 @@
 import { Hono } from "hono";
 import { logger } from "hono/logger";
 import { HTTPException } from "hono/http-exception";
-import { addExampleRedirects } from "./utils";
+import { prettyJSON } from "hono/pretty-json";
+import { EXAMPLES_MAP, addExampleRedirects } from "./utils";
 import { cache } from "./cache";
 import type { HonoContext } from "./types";
 import { LESETID_EXAMPLE_TYPEBOX_SCHEMA } from "./schema";
 
 const app = new Hono<HonoContext>();
 
+app.use("*", prettyJSON());
 app.use("*", logger());
 app.get(
   "*",
@@ -37,6 +39,16 @@ app.get("/schema", async (ctx) => {
   return ctx.json(LESETID_EXAMPLE_TYPEBOX_SCHEMA);
 });
 
+app.get("/", async (ctx) => {
+  return ctx.json({
+    examples: [...EXAMPLES_MAP],
+  });
+});
+
+app.use("/:example/*", async (ctx, next) => {
+  return await next();
+});
+
 app.onError(async (err, ctx) => {
   if (err instanceof HTTPException) {
     return err.getResponse();
@@ -54,4 +66,10 @@ app.notFound(async () => {
   });
 });
 
-export default app;
+export default {
+  fetch: app.fetch,
+  async scheduled(event, env, ctx) {
+    console.info("Cron trigger!");
+    ctx.waitUntil(new Promise((resolve) => setTimeout(resolve, 1000)));
+  },
+} satisfies ExportedHandler<HonoContext>;
