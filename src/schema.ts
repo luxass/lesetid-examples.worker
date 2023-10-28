@@ -43,7 +43,7 @@ function OneOf<T extends TSchema[]>(
 
 const ICON_URL = Type.String({
   description: "The url to the icon",
-  format: "uri",
+  pattern: "^\/",
 });
 
 export const LESETID_EXAMPLE_TYPEBOX_SCHEMA = Type.Object(
@@ -73,5 +73,3 @@ export const LESETID_EXAMPLE_TYPEBOX_SCHEMA = Type.Object(
     additionalProperties: false,
   },
 );
-
-export const LESETID_EXAMPLE_VALIDATE = ajv.compile(LESETID_EXAMPLE_TYPEBOX_SCHEMA);
