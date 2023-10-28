@@ -7,3 +7,16 @@ WORKER_ENV = "production"
 
 [triggers]
 crons = ["*/10 * * * *"]
+
+routes = [
+  { pattern = "astro.lesetid.dev", custom_domain = true }
+  { pattern = "astro-example.lesetid.dev", custom_domain = true }
+  { pattern = "next.lesetid.dev", custom_domain = true }
+  { pattern = "next-example.lesetid.dev", custom_domain = true }
+  { pattern = "nuxt.lesetid.dev", custom_domain = true }
+  { pattern = "nuxt-example.lesetid.dev", custom_domain = true }
+  { pattern = "sveltekit.lesetid.dev", custom_domain = true }
+  { pattern = "sveltekit-example.lesetid.dev", custom_domain = true }
+  { pattern = "vite.lesetid.dev", custom_domain = true }
+  { pattern = "vite-example.lesetid.dev", custom_domain = true }
+]
