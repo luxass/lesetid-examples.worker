@@ -38,7 +38,7 @@ app.use("*", async (ctx, next) => {
   const url = new URL(ctx.req.url);
 
   EXAMPLES.forEach((example) => {
-    console.info("EXAMPLE", example);
+    console.info("EXAMPLE", example, url);
     addExampleRedirects(ctx, url, example.key);
   });
 
