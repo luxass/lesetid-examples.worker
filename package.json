@@ -1,0 +1,32 @@
+{
+  "name": "lesetid-examples.worker",
+  "private": true,
+  "packageManager": "pnpm@8.10.0",
+  "description": "An Cloudflare Worker that redirects links to lesetid examples",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "wrangler deploy --dry-run --outdir=dist",
+    "deploy": "wrangler deploy",
+    "test": "vitest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@octokit/core": "^5.0.1",
+    "@octokit/plugin-paginate-rest": "^9.1.2",
+    "@sinclair/typebox": "^0.31.20",
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1",
+    "github-schema": "^1.1.0",
+    "hono": "^3.9.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20231025.0",
+    "@luxass/eslint-config": "^3.3.2",
+    "eslint": "^8.52.0",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6",
+    "wrangler": "^3.15.0"
+  }
+}

@@ -1,0 +1,6 @@
+name = "examples-lesetid"
+main = "src/index.ts"
+compatibility_date = "2023-08-20"
+
+[vars]
+WORKER_ENV = "production"
