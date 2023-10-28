@@ -3,6 +3,7 @@ main = "src/index.ts"
 compatibility_date = "2023-08-20"
 
 routes = [
+  { pattern = "examples.lesetid.dev", custom_domain = true },
   { pattern = "astro-example.lesetid.dev", custom_domain = true },
   { pattern = "next-example.lesetid.dev", custom_domain = true },
   { pattern = "nuxt-example.lesetid.dev", custom_domain = true },
