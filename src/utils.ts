@@ -10,7 +10,7 @@ export function addExampleRedirects<TContext extends Context>(ctx: TContext, url
     }
 
     if (url.pathname === "/codespaces") {
-      return ctx.redirect(`/${example}/codespace`);
+      return ctx.redirect(`/${example}/codespaces`);
     }
 
     return ctx.redirect(`/${example}/stackblitz`);
