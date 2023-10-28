@@ -2,7 +2,7 @@ import type { Context } from "hono";
 import type { Example } from "./types";
 
 export function addExampleRedirects<TContext extends Context>(ctx: TContext, url: URL, example: string) {
-  if (url.host.startsWith(example) || url.host.startsWith(`${example}-example`)) {
+  if (url.host.startsWith(`${example}-example`)) {
     if (url.pathname === "/codesandbox") {
       return ctx.redirect(`/${example}/codesandbox`);
     }
