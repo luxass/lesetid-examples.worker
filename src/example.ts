@@ -34,8 +34,8 @@ const ExamplesSchema = array(object({
   ]),
 }));
 
-export async function getExamples(octokit: Octokit): Promise<Set<Example>> {
-  const newMap = new Set<Example>();
+export async function getExamples(octokit: Octokit): Promise<Example[]> {
+  const examples: Example[] = [];
   const {
     data,
   } = await octokit.request("https://api.github.com/repos/luxass/lesetid/contents/examples", {
@@ -62,10 +62,10 @@ export async function getExamples(octokit: Octokit): Promise<Set<Example>> {
       exampleObj.iconUrl = `https://raw.githubusercontent.com/luxass/lesetid/main/examples/${_example.name}/.lesetid${exampleObj.iconUrl}`;
     }
 
-    newMap.add(Object.assign(exampleObj, {
+    examples.push(Object.assign(exampleObj, {
       key: _example.name.replace("-example", ""),
     }));
   }));
 
-  return newMap;
+  return examples;
 }

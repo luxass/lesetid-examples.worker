@@ -25,7 +25,15 @@ app.get("/view-source", (ctx) => {
   return ctx.redirect("https://github.com/luxass/lesetid");
 });
 
+app.get("/view", (ctx) => ctx.redirect("https://lesetid.dev/examples"));
+
 app.use("*", async (ctx, next) => {
+  if (ctx.req.method !== "GET") {
+    return ctx.text("Method not allowed", 405, {
+      Allow: "GET",
+    });
+  }
+
   if (!EXAMPLES.length) {
     const octokit = new Octokit({
       auth: ctx.env.GITHUB_TOKEN,
