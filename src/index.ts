@@ -68,6 +68,7 @@ app.use("*", async (ctx, next) => {
 });
 
 app.get("/schema", async (ctx) => {
+  return ctx.json(LESETID_EXAMPLE_TYPEBOX_SCHEMA);
 });
 
 app.get("/", async (ctx) => {
