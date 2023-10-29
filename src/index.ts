@@ -49,14 +49,25 @@ app.use("*", async (ctx, next) => {
   const url = new URL(ctx.req.url);
 
   for (const example of EXAMPLES) {
-    addExampleRedirects(ctx, url, example.key);
+    if (!url.host.startsWith(`${example.key}-example`)) {
+      continue;
+    }
+
+    if (url.pathname === "/codesandbox") {
+      return ctx.redirect(`/${example.key}/codesandbox`);
+    }
+
+    if (url.pathname === "/codespaces") {
+      return ctx.redirect(`/${example.key}/codespaces`);
+    }
+
+    return ctx.redirect(`/${example.key}/stackblitz`);
   }
 
   return await next();
 });
 
 app.get("/schema", async (ctx) => {
-  return ctx.json(LESETID_EXAMPLE_TYPEBOX_SCHEMA);
 });
 
 app.get("/", async (ctx) => {
