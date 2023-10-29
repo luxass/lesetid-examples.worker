@@ -3,6 +3,7 @@ import { logger } from "hono/logger";
 import { HTTPException } from "hono/http-exception";
 import { prettyJSON } from "hono/pretty-json";
 import { Octokit } from "@octokit/core";
+import { serveStatic } from "hono/cloudflare-workers";
 import { EXAMPLES, addExampleRedirects } from "./utils";
 import { cache } from "./cache";
 import type { HonoContext } from "./types";
@@ -20,6 +21,8 @@ app.get(
     cacheControl: "max-age=3600",
   }),
 );
+
+app.get("/favicon.ico", serveStatic({ path: "./favicon.ico" }));
 
 app.get("/view-source", (ctx) => {
   return ctx.redirect("https://github.com/luxass/lesetid");

@@ -11,6 +11,8 @@ routes = [
   { pattern = "vite-example.lesetid.dev", custom_domain = true }
 ]
 
+[site]
+bucket = "./assets"
 
 [vars]
 WORKER_ENV = "production"
