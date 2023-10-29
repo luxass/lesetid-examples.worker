@@ -46,18 +46,18 @@ export const LESETID_EXAMPLE_TYPEBOX_SCHEMA = Type.Object(
     $schema: Type.String({
       description: "The schema uri to use, this is only here to make additionalProperties not warn.",
     }),
-    stackblitz: Type.Optional(Type.String({
+    stackblitz: Type.String({
       description: "The url to the stackblitz",
       format: "uri",
-    })),
-    codesandbox: Type.Optional(Type.String({
+    }),
+    codesandbox: Type.String({
       description: "The url to the codesandbox",
       format: "uri",
-    })),
-    codespaces: Type.Optional(Type.String({
+    }),
+    codespaces: Type.String({
       description: "The url to the codespaces",
       format: "uri",
-    })),
+    }),
   },
   {
     $schema: "http://json-schema.org/draft-07/schema",
