@@ -4,11 +4,12 @@ import { HTTPException } from "hono/http-exception";
 import { prettyJSON } from "hono/pretty-json";
 import { Octokit } from "@octokit/core";
 import { serveStatic } from "hono/cloudflare-workers";
-import { EXAMPLES, addExampleRedirects } from "./utils";
 import { cache } from "./cache";
-import type { HonoContext } from "./types";
+import type { Example, HonoContext } from "./types";
 import { LESETID_EXAMPLE_TYPEBOX_SCHEMA } from "./schema";
 import { getExamples } from "./example";
+
+export const EXAMPLES: Example[] = [];
 
 const app = new Hono<HonoContext>();
 
@@ -49,7 +50,7 @@ app.use("*", async (ctx, next) => {
   const url = new URL(ctx.req.url);
 
   for (const example of EXAMPLES) {
-    if (!url.host.startsWith(`${example.key}-example`) && url.pathname === "") {
+    if (!url.host.startsWith(`${example.key}-example`) || url.pathname.startsWith(`/${example.key}/`)) {
       continue;
     }
 
