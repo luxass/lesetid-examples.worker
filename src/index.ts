@@ -49,7 +49,7 @@ app.use("*", async (ctx, next) => {
   const url = new URL(ctx.req.url);
 
   for (const example of EXAMPLES) {
-    if (!url.host.startsWith(`${example.key}-example`)) {
+    if (!url.host.startsWith(`${example.key}-example`) && url.pathname === "") {
       continue;
     }
 
