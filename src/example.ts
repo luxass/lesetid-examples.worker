@@ -17,6 +17,9 @@ const ExampleFileSchema = object({
   ])),
   title: string(),
   url: string(),
+  stackblitz: string(),
+  codesandbox: string(),
+  codespaces: string(),
 });
 
 export const ExampleSchema = merge([ExampleFileSchema, object({

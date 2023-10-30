@@ -96,17 +96,14 @@ app.get("/:example/:provider?", async (ctx) => {
     provider = DEFAULT_PROVIDER;
   }
 
-  const normalizedExampleName = ctx.req.param("example")?.includes("-example") ? ctx.req.param("example") : `${ctx.req.param("example")}-example`;
-
   if (provider === "codesandbox") {
-    return ctx.redirect(`https://codesandbox.io/p/sandbox/github/luxass/lesetid/tree/main/examples/${normalizedExampleName}`);
+    return ctx.redirect(found.codesandbox);
   }
 
   if (provider === "codespaces") {
-    return ctx.redirect(`https://codespaces.new/luxass/lesetid?devcontainer_path=.devcontainer/${normalizedExampleName}/devcontainer.json`);
+    return ctx.redirect(found.codespaces);
   }
-
-  return ctx.redirect(`https://stackblitz.com/github/luxass/lesetid/tree/main/examples/${normalizedExampleName}?title=${encodeURIComponent(`lesetid | ${found.title}`)}`);
+  return ctx.redirect(found.stackblitz);
 });
 
 app.onError(async (err, ctx) => {
